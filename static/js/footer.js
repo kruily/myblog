@@ -34,7 +34,12 @@ $(function(){
         let CurrentURL = window.location.href;
         str1 = CurrentURL.split('/');
         let obody = $('body');
-        obody.css('background',"url('../../static/imgs/"+backgroundImg[str1[3]]+"') no-repeat center");
+        if(str1[3] == ''){
+            obody.css('background',"url('../../static/imgs/"+backgroundImg["index"]+"') no-repeat center");
+                    
+        }else{
+            obody.css('background',"url('../../static/imgs/"+backgroundImg[str1[3]]+"') no-repeat center");            
+        }
         obody.css('backgroundSize','cover');
         obody.css('height','100vh');
         $('.navbar').css('cssText','background:'+headcolorDict[str1[3]]+'!important;');
