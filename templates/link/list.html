@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}友链{% endblock title %}
+
+
+
+{% block content %}
+{#    友链添加表单#}
+    <div id="shell">
+<div id="link-form" class="form-container" >
+     <form  method="post" action="{% url 'links:add' %}"
+          enctype="multipart/form-data"
+          class="col-8"
+     >
+        {% csrf_token %}
+         <div class="close">
+             <span ></span>
+         </div>
+        <!-- 友链头像 -->
+        <div class="group">
+            <label for="avatar">头像</label>
+            <input type="file" class="form-control-file" name="avatar" id="avatar">
+        </div>
+        <div class="group">
+            <!-- 标签 -->
+            <label for="name">用户名</label>
+            <!-- 文本框 -->
+            <input type="text" class="form-control" id="name" name="name">
+        </div>
+        <div class="group">
+            <!-- 标签 -->
+            <label for="url">地址</label>
+            <!-- 文本框 -->
+            <input type="text" class="form-control" id="url" name="url">
+        </div>
+         <button type="submit" >完成</button>
+    </form>
+</div>
+</div>
+<div class="link-container">
+    <div class="inner-container">
+        {% for link in links %}
+            <div class="link-box" >
+                <a href="{{ link.url }}" target="_blank">
+                    <img src="{{ link.avatar.url }}"
+                         alt="avatar"
+                         style="max-width:100%; border-radius: 20px;"
+                        >
+                    <br>
+                    <h6 style="display:block; text-align: center" >{{ link.name }}</h6>
+                </a>
+
+            </div>
+        {% endfor %}
+        <a class="add link-box">
+            <img id="add-img" src="{% static 'imgs/add.png' %}" alt="">
+        </a>
+    </div>
+
+</div>
+
+{% endblock content %}
+
+{% block script %}
+    <script>
+        {% if message %}
+            alert('{{ message }}')
+        {% endif %}
+       let add =  $('#add-img');
+       add.mouseover(function () {
+            add.attr('src','{% static 'imgs/add1.png' %}')
+       });
+       add.mouseleave(function () {
+            add.attr('src','{% static 'imgs/add.png' %}')
+       });
+        add.click(function () {
+            $('.form-container').toggle(true);
+            $('.link-container').css('zIndex','-1');
+        });
+        $('.close').click(function () {
+            $('.form-container').toggle(false);
+            $('.link-container').css('zIndex','1');
+        });
+    </script>
+
+{% endblock script %}
+
+

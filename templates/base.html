@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock title %}</title>
+{#    css 样式连接 #}
+<link type="text/css" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/fontawesome.min.css" rel="stylesheet">
+<link type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet">
+<link type="text/css" href="https://cdn.bootcdn.net/ajax/libs/layer/3.1.1/theme/default/layer.css" rel="stylesheet">
+<link type="text/css" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/md_css/monokai.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/body/index.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/link/link.css' %}">
+
+{#    js  脚本连接 #}
+<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+<script src="{% static 'js/sticky_sidebar/jquery.sticky-sidebar.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/popper.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/layer/layer.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/footer.js' %}"></script>
+</head>
+<body>
+
+{% include 'header.html' %}
+
+{% block content %}{% endblock content %}
+
+
+{% include 'footer.html' %}
+{% block script %}{% endblock script %}
+
+</body>
+</html>

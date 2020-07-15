@@ -1,0 +1,119 @@
+@font-face {
+    font-family: QLRF;
+    src: url("../../font/麒麟如风.ttf");
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Ubuntu", sans-serif;
+    text-decoration: none;
+    color: #303540;
+}
+body{
+    background-position: center;
+    background-attachment: fixed!important;
+}
+#home{
+    height: 100vh;
+    min-height: 500px;
+}
+#home .inner-width{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+}
+#home .content{
+    width: 100%;
+    color: white;
+}
+
+#home .content h1{
+    font-size: 60px;
+    margin-bottom: 60px;
+    font-family: QLRF;
+
+}
+.sm a{
+    color: #fff;
+    font-size: 22px;
+    margin: 0 10px;
+    transition: .2s linear;
+}
+.sm a:hover{
+    color: #48dbfb;
+}
+#home .buttons{
+    margin-top: 60px;
+}
+#home .buttons a{
+    display: inline-block;
+    margin: 15px 30px;
+    color: #48dbfb;
+    font-size: 15px;
+    font-weight: 500;
+    width: 100px;
+    border: 1px solid #48dbfb;
+    padding: 14px 0;
+    border-radius: 6px;
+    transition: .2s linear;
+}
+#home .buttons a:hover{
+    background-color: #48dbfb;
+    color: white;
+    text-decoration: none;
+}
+
+
+.stricy{
+    background-color: white;
+    padding: 18px 0;
+}
+.stricy .navbar-menu a{
+    color: #111;
+}
+.stricy .menu-toggler span{
+    background-color: #111;
+}
+body #allback{
+    width: 100%;
+    height: 100vh;
+    /*opacity: .1;*/
+    position: absolute;
+    top: 0;
+    display: none;
+}
+.Social-box{
+    width: 600px;
+    height: 300px;
+    background: linear-gradient(#8DD5ED,#70BACC);
+    position: absolute;
+    top: 0;
+    left: calc(50% - 300px);
+    transition: .3s linear;
+    box-sizing: border-box;
+    text-align: center;
+}
+#allback:target{
+    display: block;
+}
+#allback:target .Social-box{
+    top: calc(50% - 200px);
+    border-radius: 3px;
+    transition: .3s linear;
+}
+.Social-box .img-box{
+    width: 50%;
+    height: 90%;
+        display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+}
+.img-box img{
+    width: 80%;
+    height: 80%;
+}
