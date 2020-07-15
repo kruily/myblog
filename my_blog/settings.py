@@ -25,7 +25,7 @@ SECRET_KEY = '3iri(0rwblo3vh4uu!xc$2-)m@y(n_fnk*u5m3!tn0uf7m#d@d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['121.199.74.114','127.0.0.1','localhost']
+ALLOWED_HOSTS = ['127.0.0.1','localhost']
 
 
 # Application definition
@@ -89,8 +89,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'blog',
         'USER':'jingxiu',
-        'PASSWORD':'jingxiu1016',
-        'HOST':'121.199.74.114',
+        'PASSWORD':'',
+        'HOST':'',
         "PORT":'3306',
     }
     # 'default':{
@@ -146,7 +146,7 @@ EMAIL_HOST = 'smtp.qq.com'
 # 改为你自己的邮箱名！
 EMAIL_HOST_USER = '1693186883@qq.com'
 # 你的邮箱密码
-EMAIL_HOST_PASSWORD = 'vxvjbkzgmesqebcd'
+EMAIL_HOST_PASSWORD = ''
 # 发送邮件的端口
 EMAIL_PORT = 587
 # 是否使用 TLS
