@@ -34,16 +34,17 @@ $(function(){
         let CurrentURL = window.location.href;
         str1 = CurrentURL.split('/');
         let obody = $('body');
-        if(str1[3] == ''){
-            obody.css('background',"url('../../static/imgs/"+backgroundImg["index"]+"') no-repeat center");
-                    
+        if(str1[3] != ''){
+            obody.css('background',"url('../../static/imgs/"+backgroundImg[str1[3]]+"') no-repeat center");
+            $('footer').css('cssText','background:'+footcolorDict[str1[3]]+'!important;');        
         }else{
-            obody.css('background',"url('../../static/imgs/"+backgroundImg[str1[3]]+"') no-repeat center");            
+            
+            obody.css('background',"url('../../static/imgs/"+backgroundImg["index"]+"') no-repeat center");
+            $('footer').css('cssText','background:'+footcolorDict['index']+'!important;');
         }
         obody.css('backgroundSize','cover');
         obody.css('height','100vh');
         $('.navbar').css('cssText','background:'+headcolorDict[str1[3]]+'!important;');
-        $('footer').css('cssText','background:'+footcolorDict[str1[3]]+'!important;');
     }
     footBackgroundColorChange();
     $(window).resize(footBackgroundColorChange);
