@@ -97,6 +97,12 @@
 .close span::after{
    transform:translateY(-2px) rotate(-45deg);
 }
-.close:hover{
 
+@media screen and (max-width: 990px){
+    .inner-container .link-box{
+        width: 35%;
+        height: 20vh;
+        position: relative;
+        left: calc(50% - 42%);
+    }
 }

@@ -1,10 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block title %}友链{% endblock title %}
-
-
-
 {% block content %}
 {#    友链添加表单#}
     <div id="shell">
@@ -50,16 +46,13 @@
                     <br>
                     <h6 style="display:block; text-align: center" >{{ link.name }}</h6>
                 </a>
-
             </div>
         {% endfor %}
         <a class="add link-box">
             <img id="add-img" src="{% static 'imgs/add.png' %}" alt="">
         </a>
     </div>
-
 </div>
-
 {% endblock content %}
 
 {% block script %}

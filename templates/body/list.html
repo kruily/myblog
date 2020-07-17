@@ -2,18 +2,6 @@
 {% extends "base.html" %}
 {% load static %}
 
-{#<style>#}
-{#    .btn-success{#}
-{#        background-color: #ff7675;#}
-{#    }#}
-{#    .btn-danger{#}
-{#        background-color: #fab1a0;#}
-{#    }#}
-{#    .btn-warning{#}
-{#        background-color: #00cec9;#}
-{#    }#}
-{#</style>#}
-
 <!-- 写入 base.html 中定义的 title -->
 {% block title %}
     列表
@@ -22,24 +10,69 @@
 <!-- 写入 base.html 中定义的 content -->
 {% block content %}
 
+<style>
+    .active{
+        color: gray!important;
+        pointer-events: none!important;
+    }
+    .list-for{
+        width: 100%;
+        height: 200px;
+        display: flex;
+    }
+    .list-for .article-avatar{
+        flex: 1;
+        margin: 0 10px;
+        height: 80%;
+        border-radius: 20px;
+    }
+    .list-for .article-link{
+        flex: 3;
+        margin: 0 10px;
+    }
+    .article-box{
+        display: block;
+    }
+    @media screen and (max-width: 760px){
+        .list-for{
+            width: 100%;
+            height: 150px!important;
+            display: flex;
+        }
+        .list-for .article-avatar{
+            width: 90px;
+            height: 70px;
+            position: relative;
+            top: calc(50% - 60px);
+        }
+        .article-link h4{
+            font-size: 18px;
+        }
+        .article-link .abstract{
+            display: none;
+        }
+        .article-link p{
+            font-size: 12px;
+        }
+    }
+</style>
 
 <!-- 定义放置文章标题的div容器 -->
 <div class="container">
-
     <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a id="a1" href="{% url 'body:list' %}?search={{ search }}&column={{ column }}&tag={{ tag }}" >
-                        最新
-                    </a>
-                </li>
-                <li id="a2" class="breadcrumb-item">
-                    <a href="{% url 'body:list' %}?order=views_total&search={{ search }}&column={{ column }}&tag={{ tag }}" >
-                        最热
-                    </a>
-                </li>
-            </ol>
-        </nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a id="a1" href="{% url 'body:list' %}?search={{ search }}&column={{ column }}&tag={{ tag }}" >
+                    最新
+                </a>
+            </li>
+            <li id="a2" class="breadcrumb-item">
+                <a href="{% url 'body:list' %}?order=views_total&search={{ search }}&column={{ column }}&tag={{ tag }}" >
+                    最热
+                </a>
+            </li>
+        </ol>
+    </nav>
     <!-- 新增，搜索栏 -->
     <div class="row">
         <div class="col-auto mr-auto">
@@ -54,7 +87,6 @@
             </form>
         </div>
     </div>
-
     <!-- 新增，搜索提示语 -->
     {% if search %}
         {% if articles %}
@@ -65,83 +97,76 @@
             <hr>
         {% endif %}
     {% endif %}
-
     <!-- 列表循环 -->
-    <div class="row mt-2">
-        {% for article in articles %}
-            <!-- 标题图 -->
-            {% if article.avatar %}
-                <div class="col-3" style="display: flex;justify-content: center;align-items: center">
-                    <img id="" src="{{ article.avatar.url }}"
-                         alt="avatar"
-                         style="display: block;border-radius: 20px;
-                         width: 100%;
-                         height: 80%;
-"
-                    >
+        <div class="article-box">
+            {% for article in articles %}
+                <div class="row mt-2 list-for">
+                    <!-- 标题图 -->
+                    {% if article.avatar %}
+                        <img class=" article-avatar"  src="{{ article.avatar.url }}" alt="avatar">
+                    {% endif %}
+                    <!-- 文章内容 -->
+                    <div class="article-link">
+                        <!-- 栏目 -->
+                        {% if article.column %}
+                            <a href="{% url 'body:list' %}?column={{ column }}">
+                                <button type="button"
+                                    class="btn btn-sm mb-2"
+                                     {% if article.column.title == 'WEB' %}
+                                        style="background-color: #ff7675"
+                                    {% elif article.column.title == '计算机理论' %}
+                                        style="background-color: #00cec9"
+                                    {% elif article.column.title == 'C/C++' %}
+                                        style="background-color: #fdcb6e"
+                                    {% endif %}
+                                >
+                                    {{ article.column }}
+                                </button>
+                            </a>
+                        {% endif %}
+                        <span>
+                            {% for tag in article.tags.all %}
+                                <a href="{% url 'body:list' %}?tag={{ tag }}"
+                                   class="badge badge-secondary"
+                                >
+                                    {{ tag }}
+                                </a>
+                            {% endfor %}
+                        </span>
+                        <!-- 标题 -->
+                        <h4>
+                            <b>
+                                <a href="{% url 'body:read' article.id %}"
+                                   style="color: black;"
+                                >
+                                    {{ article.title }}
+                                </a>
+                            </b>
+                        </h4>
+                        <!-- 摘要 -->
+                        <div>
+                            <p style="color: gray;" class="abstract">
+                                {{ article.body|slice:'100' }}...
+                            </p>
+                        </div>
+                        <!-- 注脚 -->
+                        <p>
+                            <!-- 附加信息 -->
+                            <span style="color: green;">
+                                {{ article.views_total }} 浏览&nbsp;&nbsp;&nbsp;
+                            </span>
+                            <span style="color: blue;">
+                                {{ article.created|date:'Y-m-d' }} 发布&nbsp;&nbsp;&nbsp;
+                            </span>
+                            <span style="color: darkred;">
+                                {{ article.updated|date:'Y-m-d' }} 更新
+                            </span>
+                        </p>
+                        <hr>
+                    </div>
                 </div>
-            {% endif %}
-            <!-- 文章内容 -->
-            <div class="col-9">
-                <!-- 栏目 -->
-                {% if article.column %}
-                    <a href="{% url 'body:list' %}?column={{ column }}">
-                        <button type="button"
-                            class="btn btn-sm mb-2"
-                             {% if article.column.title == 'WEB' %}
-                                style="background-color: #ff7675"
-                            {% elif article.column.title == '计算机理论' %}
-                                style="background-color: #00cec9"
-                            {% elif article.column.title == 'C/C++' %}
-                                style="background-color: #fdcb6e"
-                            {% endif %}
-                        >
-                            {{ article.column }}
-                        </button>
-                    </a>
-                {% endif %}
-                <span>
-                    {% for tag in article.tags.all %}
-                        <a href="{% url 'body:list' %}?tag={{ tag }}"
-                           class="badge badge-secondary"
-                        >
-                            {{ tag }}
-                        </a>
-                    {% endfor %}
-                </span>
-                <!-- 标题 -->
-                <h4>
-                    <b>
-                        <a href="{% url 'body:read' article.id %}"
-                           style="color: black;"
-                        >
-                            {{ article.title }}
-                        </a>
-                    </b>
-                </h4>
-                <!-- 摘要 -->
-                <div>
-                    <p style="color: gray;">
-                        {{ article.body|slice:'100' }}...
-                    </p>
-                </div>
-                <!-- 注脚 -->
-                <p>
-                    <!-- 附加信息 -->
-                    <span style="color: green;">
-                        {{ article.views_total }} 浏览&nbsp;&nbsp;&nbsp;
-                    </span>
-                    <span style="color: blue;">
-                        {{ article.created|date:'Y-m-d' }} 发布&nbsp;&nbsp;&nbsp;
-                    </span>
-                    <span style="color: darkred;">
-                        {{ article.updated|date:'Y-m-d' }} 更新
-                    </span>
-                </p>
-                <hr>
-            </div>
-        {% endfor %}
-    </div>
+            {% endfor %}
+        </div>
 </div>
     <!-- 页码导航 -->
 <div class="pagination row">
@@ -183,16 +208,8 @@
         </span>
     </div>
 </div>
-
-
 {% endblock content %}
 
-<style>
-    .active{
-        color: gray!important;
-        pointer-events: none!important;
-    }
-</style>
 
 <script>
     window.onload = function () {
