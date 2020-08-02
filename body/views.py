@@ -132,8 +132,6 @@ def upload_images(request):
             new_img.image = img
             new_img.save()
         return HttpResponse('上传成功!')
-    else :
-        return HttpResponse('仅支持POST请求')
 
 # 删文章
 def delete(request, id):
