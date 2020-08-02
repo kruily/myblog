@@ -3,7 +3,6 @@ from django.views import View
 from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from body.models import Article
-
 # Create your views here.
 
 
@@ -27,6 +26,7 @@ class CommentNoticeUpdateView(View):
     def get(self,request):
         # 获取未读消息
         notice_id = request.GET.get('notice_id')
+        
         # 更新单条通知
         if notice_id:
             article = Article.objects.get(id=request.GET.get('article_id'))

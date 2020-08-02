@@ -44,7 +44,10 @@
                 <div class="form-group">
                     <label for="body">文章正文</label>
                     <!-- 文本域不需要 value 属性，直接在标签体中嵌入数据即可 -->
-                    <textarea type="text" class="form-control" id="body" name="body" rows="12">{{ article.body }}</textarea>
+                    <div  id="body" name="body" >
+                            {{ article_form.media }}
+                            {{ article_form.body }}
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary">完成</button>
             </form>

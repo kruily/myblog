@@ -62,8 +62,6 @@ class Article(models.Model):
         return article
 
 
-
-
     class Meta:
         ordering = ('-created',)
 
@@ -73,6 +71,16 @@ class Article(models.Model):
     def get_absolute_url(self):
         return reverse('body:read', args=[self.id])
 
+class ArticleImage(models.Model):
+    image = models.ImageField(upload_to='article/%Y/%m/%d/',blank=True)
+    # 保存图片时处理
+    def save(self, *args, **kwargs):
+        profile = super(ArticleImage, self).save(*args, **kwargs)
+        # 固定宽度缩放图片大小
+        if self.image and not kwargs.get('update_file'):
+            image = Image.open((self.image))
+            image.save(self.image.path)
+        return profile
 
 #删除文件
 @receiver(pre_delete, sender=Article)

@@ -1,82 +1,84 @@
 {% extends 'base.html' %}
 {% load static %}
+<style>
+    .show-self .text-left{
+
+    }
+    @media screen and (max-width: ){
+
+    }
+</style>
 {% block title %}友链{% endblock title %}
 {% block content %}
-{#    友链添加表单#}
-    <div id="shell">
-<div id="link-form" class="form-container" >
-     <form  method="post" action="{% url 'links:add' %}"
-          enctype="multipart/form-data"
-          class="col-8"
-     >
-        {% csrf_token %}
-         <div class="close">
-             <span ></span>
-         </div>
-        <!-- 友链头像 -->
-        <div class="group">
-            <label for="avatar">头像</label>
-            <input type="file" class="form-control-file" name="avatar" id="avatar">
-        </div>
-        <div class="group">
-            <!-- 标签 -->
-            <label for="name">用户名</label>
-            <!-- 文本框 -->
-            <input type="text" class="form-control" id="name" name="name">
-        </div>
-        <div class="group">
-            <!-- 标签 -->
-            <label for="url">地址</label>
-            <!-- 文本框 -->
-            <input type="text" class="form-control" id="url" name="url">
-        </div>
-         <button type="submit" >完成</button>
-    </form>
-</div>
-</div>
-<div class="link-container">
-    <div class="inner-container">
-        {% for link in links %}
-            <div class="link-box" >
-                <a href="{{ link.url }}" target="_blank">
-                    <img src="{{ link.avatar.url }}"
-                         alt="avatar"
-                         style="max-width:100%; border-radius: 20px;"
-                        >
-                    <br>
-                    <h6 style="display:block; text-align: center" >{{ link.name }}</h6>
-                </a>
-            </div>
-        {% endfor %}
-        <a class="add link-box">
-            <img id="add-img" src="{% static 'imgs/add.png' %}" alt="">
-        </a>
+    <div class="container text-center pb-3" >
+        <h1 class="css224e74cd582220a font-weight-bolder">友情链接</h1>
+        <text style="font-family: 'Birch Std';" class="pb-5">有雨落的声音,也会有心跳的声音</text>
     </div>
-</div>
-{% endblock content %}
+    <div class="container pb-3" >
+        <h5 style="font-family:圆体-简" class="mt-1 mb-1">链接申请说明</h5>
+        <div class="row">
+            <span class="ml-3 mb-1 col-4 col-lg-3">X 不良网站</span>
+            <span class="ml-3 mb-1 col-4 col-lg-3">X 红标报毒</span>
+            <span class="ml-3 mb-1 col-4 col-lg-3">X 经常宕机</span>
+            <span class="ml-3 mb-1 col-4 col-lg-3">√ 风评良好</span>
+            <span class="ml-3 mb-1 col-4 col-lg-3">√ 原创优先</span>
+            <span class="ml-3 mb-1 col-4 col-lg-3">√ 技术优先</span>
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg-6  text-center text-lg-left">
+                <p class="text-monospace mt-1 mb-1 mb-lg-3 d-block text-left" >本站链接如下:</p>
+                <span class="ml-3 d-block mb-1 mb-lg-3 text-left" >名称:惊修</span>
+                <span class="ml-3 d-block mb-1 mb-lg-3 text-left text-wrap" >网址:www.jingxiublog.store</span>
+                <span class="ml-3 d-block mb-1 mb-lg-3 text-left text-break" >头像:<span class="text-break">jingxiublog.store/media/jx.jpg</span></span>
+                <span class="ml-3 d-block mb-1 mb-lg-3 text-left text-wrap" >宣言:山高路远,随心而行</span>
+            </div>
+            <form action="{% url 'links:link' %}" class="col-12 col-lg-6 text-center text-lg-left" method="post">
+                {% csrf_token %}
+               <div class="mb-1">
+                    <p class="text-monospace mt-1 d-block float-left" >交换友链在下方留言:</p>
+                   {% if user.is_authenticated %}
+                    <button class="btn btn-success float-right mr-3" style="font-size: .7rem">提交</button>
+               </div>
 
+                <div class="input-group mb-1 col-12 row">
+                  <div class="input-group-prepend">
+                    <span for="linkname" class="input-group-text" id="basic-addon1">名称</span>
+                  </div>
+                  <input type="text" class="form-control" name="name" placeholder="Username" aria-label="linkname" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-1 col-12 row text-left">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text " id="basic-addon1">网址</span>
+                  </div>
+                  <input type="text" class="form-control" name="url" placeholder="https://......" aria-label="url" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-1 col-12 row text-left">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text " id="basic-addon1">头像</span>
+                  </div>
+                  <input type="text" class="form-control" name="avatar" placeholder="https://......" aria-label="avatar" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-1 col-12 row text-left">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"  id="basic-addon1">宣言</span>
+                  </div>
+                  <input type="text" class="form-control" name="declaration" placeholder="......" aria-label="declaration" aria-describedby="basic-addon1">
+                </div>
+            </form>
+            {% else %}
+                 <br>
+                    <h5 class="mt-5 text-center justify-content-center">
+                        请<a href="{% url 'userprofile:login' %}">登录</a>后留言
+                    </h5>
+                       <p class="text-center">因为本人还没搞明白匿名用户如何留言</p>
+                    <br>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}
 {% block script %}
     <script>
-        {% if message %}
-            alert('{{ message }}')
-        {% endif %}
-       let add =  $('#add-img');
-       add.mouseover(function () {
-            add.attr('src','{% static 'imgs/add1.png' %}')
-       });
-       add.mouseleave(function () {
-            add.attr('src','{% static 'imgs/add.png' %}')
-       });
-        add.click(function () {
-            $('.form-container').toggle(true);
-            $('.link-container').css('zIndex','-1');
-        });
-        $('.close').click(function () {
-            $('.form-container').toggle(false);
-            $('.link-container').css('zIndex','1');
-        });
     </script>
-
 {% endblock script %}
 
 

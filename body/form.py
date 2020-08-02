@@ -10,4 +10,4 @@ from .models import Article
 class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
-        fields = ('title', 'body','tags','avatar')
+        fields = ('title', 'body','tags','avatar',)

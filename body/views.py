@@ -1,7 +1,8 @@
+from PIL.Image import Image
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Article, ArticleColumn,Article_delete
+from .models import Article, ArticleColumn,Article_delete,ArticleImage
 import markdown
 from .form import ArticleForm
 from django.contrib.auth.decorators import login_required
@@ -9,7 +10,6 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from comment.models import Comment
 from comment.forms import CommentForm
-
 # Create your views here.
 
 
@@ -123,6 +123,17 @@ def createArticle(request):
         # 返回模板
         return render(request, 'body/create.html', context)
 
+# 上传文章的插图
+def upload_images(request):
+    if request.method == 'POST':
+        images = request.FILES.getlist('image[]')
+        for img in images:
+            new_img = ArticleImage.objects.create()
+            new_img.image = img
+            new_img.save()
+        return HttpResponse('上传成功!')
+    else :
+        return HttpResponse('仅支持POST请求')
 
 # 删文章
 def delete(request, id):

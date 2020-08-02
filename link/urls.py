@@ -9,6 +9,5 @@ from .views import *
 app_name = 'link'
 
 urlpatterns = [
-    path('', link, name='link_form'),
-    path('add/',add_link,name='add'),
+    path('', link, name='link'),
 ]

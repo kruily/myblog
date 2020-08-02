@@ -1,10 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-
-{% block title %}
-    通知
-{% endblock title %}
-
+{% block title %}通知{% endblock title %}
 {% block content %}
 <div class="container">
     <div class="row mt-4 ml-4">
@@ -14,29 +10,43 @@
     <div class="row mt-2 ml-4">
         <ul class="list-group">
             {% for notice in notices %}
-                <li class="list-group-item" id="notice_link">
+                <li class="list-group-item mr-lg-0 mr-4" id="notice_link" >
+                    {% if  notice.target.id %}
                     <a href="{% url "notice:update" %}?article_id={{ notice.target.id }}&notice_id={{ notice.id }}#comment_elem_{{ notice.action_object.id }}"
                        target="_blank"
                     >
                     <span style="color: #5897fb;">
                         {{ notice.actor }}
                     </span>
-                        在 <span style="color: #01a252;">{{ notice.target }}</span> {{ notice.verb }}。
+                        在 <span style="color: #01a252;">
+                            {{ notice.target }}
+                            </span> {{ notice.verb }}。
                     </a>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ notice.timestamp|date:"Y/m/d H:i" }}
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;时间:{{ notice.timestamp|date:"Y/m/d H:i" }}
+                    {% else %}
+                    <span style="color: #5897fb;">{{ notice.actor }}</span>
+                    在 <span style="color: #01a252;">link</span> {{ notice.verb }}。
+                    内容为: <br><div class="row">
+                                    <span class="col-3 mr-0 pr-0 text-monospace">名称:</span>
+                                    <span class="text-break col-8 text-monospace">{{ notice.action_object.name }}</span>
+                                </div>
+                            <br><div class="row">
+                                    <span class="col-3 mr-0 pr-0 text-monospace">网址:</span>
+                                    <span class="text-break col-8 text-monospace">{{ notice.action_object.url }}</span>
+                                </div>
+                            <br><div class="row">
+                                    <span class="col-3 mr-0 pr-0 text-monospace">头像:</span>
+                                    <span class="text-break col-8 text-monospace">{{ notice.action_object.url }}</span>
+                                </div>
+                            <br><div class="row">
+                                    <span class="col-3 mr-0 pr-0 text-monospace">宣言:</span>
+                                    <span class="text-break col-8 text-monospace">{{ notice.action_object.url }}</span>
+                                </div>
+                     <br>时间:{{ notice.timestamp|date:"Y/m/d H:i" }}
+                    {% endif %}
                 </li>
             {% endfor %}
         </ul>
     </div>
 </div>
-
-<style>
-    #notice_link a:link {
-        color: black;
-    }
-
-    #notice_link a:visited {
-        color: lightgrey;
-    }
-</style>
 {% endblock content %}

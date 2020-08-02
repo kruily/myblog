@@ -15,4 +15,5 @@ urlpatterns = [
     path('create/', createArticle, name='create'),
     path('delete/<int:id>',delete, name='delete'),
     path('update/<int:id>', update, name='update'),
+    path('uploads/',upload_images,name='upload_images'),
 ]

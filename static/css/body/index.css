@@ -60,52 +60,115 @@ body{
     color: white;
     text-decoration: none;
 }
-
-
-.stricy{
-    background-color: white;
-    padding: 18px 0;
+footer p{
+    font-size: .8rem;
 }
-.stricy .navbar-menu a{
-    color: #111;
+.pb-3, .py-3{
+    padding-bottom: .6rem!important;
 }
-
-body #allback{
-    width: 100%;
-    height: 100vh;
-    /*opacity: .1;*/
-    position: absolute;
-    top: 0;
-    display: none;
+.pt-3, .py-3{
+        padding-top: .6rem!important;
 }
-.Social-box{
-    width: 600px;
-    height: 300px;
-    background: linear-gradient(#8DD5ED,#70BACC);
-    position: absolute;
-    top: 0;
-    left: calc(50% - 300px);
-    transition: .3s linear;
-    box-sizing: border-box;
-    text-align: center;
-}
-#allback:target{
-    display: block;
-}
-#allback:target .Social-box{
-    top: calc(50% - 200px);
-    border-radius: 3px;
-    transition: .3s linear;
-}
-.Social-box .img-box{
-    width: 50%;
-    height: 90%;
-        display: flex;
-    justify-content: center;
-    align-items: center;
+#sidebar{
+    width: 205px;
+    position: fixed!important;
+    top: calc(8%);
+    left: calc(8%);
     float: left;
 }
-.img-box img{
-    width: 80%;
-    height: 80%;
+.direc-button{
+    width: 30px;
+    height: 50px;
+    font-size: 10px;
+    text-align: left;
+    position: fixed;
+    left: calc(18%);
+    float: left;
+    display: none;
+}
+.django-ckeditor-widget{
+    width: 100%;
+}
+#upload-btn{
+    background: white;
+    color: #7abaff;
+    border: 1px solid #7abaff;
+    border-radius: 8px;
+
+}
+#upload-btn:hover{
+    background: #7abaff;
+    color: white;
+    border: 1px solid white;
+}
+@media screen and (max-width: 1680px){
+    #sidebar{
+        position: fixed;
+        left: calc(3%);
+    }
+}
+@media screen and (max-width: 1620px){
+    .direc-button{
+        display: block;
+        position: fixed!important;
+        bottom: 45%;
+        left: -5px;
+        z-index: 99;
+        transition: .1s linear;
+    }
+    .direc-button.direc-active{
+        left: 205px;
+    }
+    #sidebar.direc-active{
+        left: 0px;
+    }
+    #sidebar{
+        position: fixed;
+        bottom: 40%;
+        left: -205px;
+        background: white;
+        z-index: 100;
+        border-radius: 25px;
+        transition: .1s linear;
+        font-size: .8rem;
+        overflow: scroll;
+    }
+}
+@media screen and (max-width: 700px){
+    #sidebar{
+        font-size: .5rem;
+    }
+    .pb-3, .py-3{
+        padding-bottom: .2rem!important;
+    }
+    .pt-3, .py-3{
+        padding-top: .2rem!important;
+    }
+    footer p{
+        font-size: .1rem;
+    }
+    .container h1{
+        font-size: 1.5rem;
+    }
+    .container h2{
+        font-size: 1.4rem;
+    }
+    .container h3{
+        font-size: 1.3rem;
+    }
+    .container h4{
+        font-size: 1.2rem;
+    }
+    .container h5{
+        font-size: 1.1rem;
+    }
+    .container h6{
+        font-size: 1rem;
+    }
+    .container div{
+        font-size: .7rem;
+    }
+    .list-group-item{
+        font-size: .7rem;
+    }
 }

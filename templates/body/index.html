@@ -10,8 +10,8 @@
             <h1>山高路远 随心而行</h1>
             <div class="sm">
                 <a href="https://github.com/jingxiu1016" class="fab fa-github" target="_blank"></a>
-                <a href="#allback" class="fab fa-qq" ></a>
-                <a href='#allback' class="fab fa-weixin" ></a>
+                <a href="#" class="fab fa-qq" title="QQ群:497724500"></a>
+                <a href='#' class="fab fa-weixin" title="公众号:惊修"></a>
             </div>
             <div class="buttons">
                 <a href="{% url 'body:list' %}">笔记查阅</a>
@@ -20,19 +20,5 @@
         </div>
     </div>
 </section>
-    <a href="{% url 'body:index' %}" id="allback" onclick="showQR()">
-        <div id="Social" class="Social-box">
-            <div class="img-box"><img src="{% static 'imgs/qqq.jpg' %}" alt=""></div>
-            <div class="img-box"><img src="{% static 'imgs/gzh.jpg' %}" alt=""></div>
-        </div>
-    </a>
 
-{% endblock content %}
-
-{% block script %}
-    <script>
-        function showQR() {
-            $('#allback').css('cssText','display:none;');
-        }
-    </script>
-{% endblock script %}
+{% endblock content %}s
